@@ -1,0 +1,19 @@
+name: "Dependency Review"
+
+on: [ pull_request ]
+
+permissions:
+  contents: read
+
+jobs:
+  dependency-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: "Checkout Repository"
+        uses: actions/checkout@main
+
+      - name: "Dependency Review"
+        uses: actions/dependency-review-action@main
+        with:
+          config-file: darbiadev/.github/.github/dependency-review-config.yaml@main
