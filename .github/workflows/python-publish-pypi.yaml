@@ -6,6 +6,6 @@ on:
 
 jobs:
   publish:
-    uses: darbiadev/.github/.github/workflows/python-pypi-publish.yaml@main
+    uses: darbiadev/.github/.github/workflows/python-pypi-publish.yaml@5083c96ad92e1a10fbcf34a04221da8d353e894a
     secrets:
       PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
