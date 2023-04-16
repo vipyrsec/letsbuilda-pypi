@@ -6,6 +6,6 @@ on:
 
 jobs:
   publish:
+    permissions:
+      id-token: write
     uses: darbiadev/.github/.github/workflows/python-pypi-publish.yaml@main
-    secrets:
-      PYPI_API_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
