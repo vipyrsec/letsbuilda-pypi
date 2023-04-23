@@ -4,8 +4,11 @@
 Changelog
 =========
 
+- :release:`3.1.1 <23th April 2023>`
+- :bug:`14` Attempting to use the package causes a KeyError
+
 - :release:`3.1.0 <23th April 2023>`
-- :feature:`12`Add ability to get Inspector link from download URL
+- :feature:`12` Add ability to get Inspector link from download URL
 
 - :release:`3.0.0 <21th April 2023>`
 - :feature:`10` Retrieve package metadata from the JSON API
