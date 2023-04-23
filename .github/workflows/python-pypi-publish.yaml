@@ -8,4 +8,4 @@ jobs:
   publish:
     permissions:
       id-token: write
-    uses: darbiadev/.github/.github/workflows/python-pypi-publish.yaml@8209a320c942ec889f2f73752bebdcb2806792e5
+    uses: letsbuilda/.github/.github/workflows/python-pypi-publish.yaml@486f136e171228dd8d8820facba6c9bcd0e76a13
