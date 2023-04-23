@@ -75,13 +75,20 @@ class URL:
     upload_time: DateTime
     upload_time_iso_8601: DateTime
     url: str
+    inspector_url: str
     yanked: bool
     yanked_reason: None
 
     @classmethod
-    def from_dict(cls, data: dict) -> "URL":
+    def from_dict(cls, data: dict, package_name: str, package_version: str) -> "URL":
         data["upload_time"]: DateTime = pendulum.parse(data["upload_time"])
         data["upload_time_iso_8601"]: DateTime = pendulum.parse(data["upload_time_iso_8601"])
+
+        data["inspector_url"] = data["url"].replace(
+            "https://files.pythonhosted.org/",
+            f"https://inspector.pypi.io/project/{package_name}/{package_version}/",
+        )
+
         return cls(**data)
 
 
@@ -135,7 +142,7 @@ class PackageMetadata:
         return cls(
             info=Info.from_dict(data["info"]),
             last_serial=data["last_serial"],
-            urls=[URL.from_dict(url_data) for url_data in data["urls"]],
+            urls=[URL.from_dict(url_data, data["name"], data["version"]) for url_data in data["urls"]],
             vulnerabilities=[Vulnerability.from_dict(vuln_data) for vuln_data in data["vulnerabilities"]],
         )
 
