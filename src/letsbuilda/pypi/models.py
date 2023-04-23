@@ -139,10 +139,11 @@ class PackageMetadata:
 
     @classmethod
     def from_dict(cls, data: dict) -> "PackageMetadata":
+        info = Info.from_dict(data["info"])
         return cls(
-            info=Info.from_dict(data["info"]),
+            info=info,
             last_serial=data["last_serial"],
-            urls=[URL.from_dict(url_data, data["name"], data["version"]) for url_data in data["urls"]],
+            urls=[URL.from_dict(url_data, info.name, info.version) for url_data in data["urls"]],
             vulnerabilities=[Vulnerability.from_dict(vuln_data) for vuln_data in data["vulnerabilities"]],
         )
 
