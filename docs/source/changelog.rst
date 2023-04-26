@@ -4,6 +4,9 @@
 Changelog
 =========
 
+- :release:`3.2.0 <25th April 2023>`
+- :feature:`17` Add version to RSS feed when available
+
 - :release:`3.1.1 <23th April 2023>`
 - :bug:`14` Attempting to use the package causes a KeyError
 
