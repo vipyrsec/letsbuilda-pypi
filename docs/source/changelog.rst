@@ -4,6 +4,9 @@
 Changelog
 =========
 
+- :release:`4.0.0 <25th April 2023>`
+- :feature:`18` Use a single function to get versioned package metadata
+
 - :release:`3.2.0 <25th April 2023>`
 - :feature:`17` Add version to RSS feed when available
 
