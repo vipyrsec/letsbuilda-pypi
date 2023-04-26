@@ -24,12 +24,11 @@ class PyPIServices:
             rss_data = xmltodict.parse(response_text)["rss"]["channel"]["item"]
             return [RSSPackageMetadata.build_from(package_data) for package_data in rss_data]
 
-    async def get_package_metadata(self, package_name: str) -> PackageMetadata:
-        """Get the new packages RSS feed"""
-        async with self.http_session.get(f"https://pypi.org/pypi/{package_name}/json") as response:
-            return PackageMetadata.from_dict(await response.json())
-
-    async def get_package_metadata_for_release(self, package_name: str, package_version: str) -> PackageMetadata:
-        """Get the new packages RSS feed"""
-        async with self.http_session.get(f"https://pypi.org/pypi/{package_name}/{package_version}/json") as response:
+    async def get_package_metadata(self, package_name: str, package_version: str | None = None) -> PackageMetadata:
+        """Get metadata for a package"""
+        if package_version is not None:
+            url = f"https://pypi.org/pypi/{package_name}/{package_version}/json"
+        else:
+            url = f"https://pypi.org/pypi/{package_name}/json"
+        async with self.http_session.get(url) as response:
             return PackageMetadata.from_dict(await response.json())
