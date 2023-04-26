@@ -153,6 +153,7 @@ class RSSPackageMetadata:
     """RSS Package metadata"""
 
     title: str
+    version: str | None
     package_link: str
     guid: str
     description: str | None
@@ -162,12 +163,20 @@ class RSSPackageMetadata:
     @classmethod
     def build_from(cls, data: dict[str, str]) -> "RSSPackageMetadata":
         """Build an instance from raw data"""
+        split_title = data.get("title").removesuffix(" added to PyPI").split()
+        title = split_title[0]
+        if len(split_title) == 2:
+            version = split_title[1]
+        else:
+            version = None
+
         publication_date: str | None = data.get("pubDate")
         if publication_date is not None:
             publication_date: datetime = _parse_publication_date(publication_date)
 
         return cls(
-            title=data.get("title").split()[0],
+            title=title,
+            version=version,
             package_link=data.get("link"),
             guid=data.get("guid"),
             description=data.get("description"),
