@@ -129,7 +129,7 @@ class Info:
 
 
 @dataclass(frozen=True, slots=True)
-class PackageMetadata:
+class JSONPackageMetadata:
     """Package metadata"""
 
     info: Info
@@ -138,7 +138,7 @@ class PackageMetadata:
     vulnerabilities: list["Vulnerability"]
 
     @classmethod
-    def from_dict(cls, data: dict) -> "PackageMetadata":
+    def from_dict(cls, data: dict) -> "JSONPackageMetadata":
         info = Info.from_dict(data["info"])
         return cls(
             info=info,
