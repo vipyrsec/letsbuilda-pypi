@@ -37,4 +37,3 @@ def read_distribution_wheel(buffer: BytesIO) -> dict[str, str]:
             if not zip_info.is_dir():
                 files[zip_info.filename] = zip_file.read(zip_info).decode(encoding="UTF-8", errors="ignore")
     return files
-
