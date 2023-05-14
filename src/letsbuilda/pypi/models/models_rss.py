@@ -15,10 +15,10 @@ class RSSPackageMetadata:
     title: str
     version: str | None
     package_link: str
-    guid: str
+    guid: str | None
     description: str | None
     author: str | None
-    publication_date: datetime | None
+    publication_date: datetime
 
     @classmethod
     def build_from(cls, data: dict[str, str]) -> "RSSPackageMetadata":
@@ -30,10 +30,6 @@ class RSSPackageMetadata:
         else:
             version = None
 
-        publication_date: str | None = data.get("pubDate")
-        if publication_date is not None:
-            publication_date: datetime = _parse_publication_date(publication_date)
-
         return cls(
             title=title,
             version=version,
@@ -41,5 +37,5 @@ class RSSPackageMetadata:
             guid=data.get("guid"),
             description=data.get("description"),
             author=data.get("author"),
-            publication_date=publication_date,
+            publication_date=_parse_publication_date(data.get("pubDate")),
         )
