@@ -16,7 +16,7 @@ jobs:
         uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab
 
       - name: "Set up Python 3.x"
-        uses: actions/setup-python@6db7460265853123c994067d0fe60a75335ca09f
+        uses: actions/setup-python@db9987b4c1f10f0404fa60ee629f675fafbd6763
         with:
           python-version: "3.x"
           cache: "pip"
@@ -42,7 +42,7 @@ jobs:
           path: dist
 
       - name: "Publish distribution 📦 to PyPI"
-        uses: pypa/gh-action-pypi-publish@0bf742be3ebe032c25dd15117957dc15d0cfc38d
+        uses: pypa/gh-action-pypi-publish@a56da0b891b3dc519c7ee3284aff1fad93cc8598
         with:
           skip-existing: true
           verbose: true
