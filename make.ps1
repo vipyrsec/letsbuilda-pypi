@@ -9,8 +9,9 @@ USAGE
 COMMANDS
     init              install Python build tools
     install-dev       install local package in editable mode
+    update-deps       update the dependencies
+    upgrade-deps      upgrade the dependencies
     lint              run `isort` and `black`
-    pylint            run `pylint`
     test              run `pytest`
     build-dist        run `python -m build`
     clean             delete generated content
@@ -18,7 +19,7 @@ COMMANDS
 #>
 param(
     [Parameter(Position = 0)]
-    [ValidateSet("init", "install", "install-dev", "lint", "pylint", "test", "build-dist", "clean", "help")]
+    [ValidateSet("init", "install-dev", "update-deps", "upgrade-deps", "lint", "test", "build-dist", "clean", "help")]
     [string]$Command
 )
 
@@ -37,15 +38,21 @@ function Invoke-Install-Dev
     python -m pip install --upgrade --editable ".[dev, tests, docs]"
 }
 
-function Invoke-Lint
+function Invoke-Update-Deps
 {
-    python -m isort src/
-    python -m black src/
+    pip-compile --output-file requirements.txt --resolver=backtracking requirements.in
 }
 
-function Invoke-Pylint
+function Invoke-Upgrade-Deps
 {
-    python -m pylint src/
+    pre-commit autoupdate
+    pip-compile --output-file requirements.txt --resolver=backtracking --upgrade requirements.in
+}
+
+function Invoke-Lint
+{
+    python -m black src/
+    python -m ruff --fix src/
 }
 
 function Invoke-Test
@@ -84,8 +91,11 @@ switch ($Command)
     "lint"  {
         Invoke-Lint
     }
-    "pylint"    {
-        Invoke-Pylint
+    "update-deps"  {
+        Invoke-Update-Deps
+    }
+    "upgrade-deps"  {
+        Invoke-Upgrade-Deps
     }
     "test"    {
         Invoke-Test
