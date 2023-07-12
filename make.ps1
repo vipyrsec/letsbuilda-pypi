@@ -51,6 +51,7 @@ function Invoke-Upgrade-Deps
 
 function Invoke-Lint
 {
+    pre-commit run --all-files
     python -m black src/
     python -m ruff --fix src/
 }

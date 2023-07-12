@@ -20,8 +20,8 @@ documentation = "https://docs.letsbuilda.dev/letsbuilda-pypi/"
 
 [project.optional-dependencies]
 dev = [
+    "pre-commit",
     "black",
-    "isort",
     "ruff",
 ]
 tests = [
