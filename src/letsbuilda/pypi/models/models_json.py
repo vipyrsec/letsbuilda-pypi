@@ -1,6 +1,7 @@
-"""Models for JSON responses"""
+"""Models for JSON responses."""
 
 from dataclasses import dataclass
+from typing import Self
 
 import pendulum
 from pendulum import DateTime
@@ -8,9 +9,9 @@ from pendulum import DateTime
 
 @dataclass(frozen=True, slots=True)
 class Vulnerability:
-    """Security vulnerability"""
+    """Security vulnerability."""
 
-    id: str
+    id: str  # noqa: A003 - fields named exactly the same as the upstream
     aliases: list[str]
     link: str
     source: str
@@ -20,7 +21,8 @@ class Vulnerability:
     fixed_in: list[str]
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Vulnerability":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         if data["withdrawn"] is not None:
             data["withdrawn"]: DateTime = pendulum.parse(data["withdrawn"])
 
@@ -29,33 +31,35 @@ class Vulnerability:
 
 @dataclass(frozen=True, slots=True)
 class Downloads:
-    """Release download counts"""
+    """Release download counts."""
 
     last_day: int
     last_month: int
     last_week: int
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Downloads":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         return cls(**data)
 
 
 @dataclass(frozen=True, slots=True)
 class Digests:
-    """URL file digests"""
+    """URL file digests."""
 
     blake2_b_256: str
     md5: str
     sha256: str
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Digests":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         return cls(**data)
 
 
 @dataclass(frozen=True, slots=True)
 class URL:
-    """Package release URL"""
+    """Package release URL."""
 
     comment_text: str
     digests: Digests
@@ -74,7 +78,8 @@ class URL:
     yanked_reason: None
 
     @classmethod
-    def from_dict(cls, data: dict, package_name: str, package_version: str) -> "URL":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         data["upload_time"]: DateTime = pendulum.parse(data["upload_time"])
         data["upload_time_iso_8601"]: DateTime = pendulum.parse(data["upload_time_iso_8601"])
 
@@ -83,7 +88,7 @@ class URL:
 
 @dataclass(frozen=True, slots=True)
 class Info:
-    """Package metadata internal info block"""
+    """Package metadata internal info block."""
 
     author: str
     author_email: str
@@ -96,7 +101,7 @@ class Info:
     downloads: Downloads
     home_page: str
     keywords: str
-    license: str
+    license: str  # noqa: A003 - fields named exactly the same as the upstream
     maintainer: str
     maintainer_email: str
     name: str
@@ -113,13 +118,14 @@ class Info:
     yanked_reason: str | None
 
     @classmethod
-    def from_dict(cls, data: dict) -> "Info":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         return cls(**data)
 
 
 @dataclass(frozen=True, slots=True)
 class JSONPackageMetadata:
-    """Package metadata"""
+    """Package metadata."""
 
     info: Info
     last_serial: int
@@ -127,7 +133,8 @@ class JSONPackageMetadata:
     vulnerabilities: list["Vulnerability"]
 
     @classmethod
-    def from_dict(cls, data: dict) -> "JSONPackageMetadata":
+    def from_dict(cls: type[Self], data: dict) -> Self:
+        """Build an instance from a dictionary."""
         info = Info.from_dict(data["info"])
         return cls(
             info=info,

@@ -1,4 +1,4 @@
-"""Response models"""
+"""Models to hold the data."""
 
-from .models_json import JSONPackageMetadata  # noqa: F401
-from .models_rss import RSSPackageMetadata  # noqa: F401
+from .models_json import JSONPackageMetadata as JSONPackageMetadata
+from .models_rss import RSSPackageMetadata as RSSPackageMetadata
