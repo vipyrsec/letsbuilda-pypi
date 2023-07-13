@@ -1,12 +1,10 @@
-"""letsbuilda-pypi
-A wrapper for PyPI's API and RSS feed
-"""
+"""A wrapper for PyPI's API and RSS feed."""
 
-from .client import PyPIServices
-from .models import PackageMetadata, RSSPackageMetadata
+from .models import JSONPackageMetadata, RSSPackageMetadata
+from .sync_client import PyPIServices
 
-__all__: list[str] = [
+__all__ = [
     "PyPIServices",
-    "PackageMetadata",
+    "JSONPackageMetadata",
     "RSSPackageMetadata",
 ]
