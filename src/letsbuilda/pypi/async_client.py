@@ -1,9 +1,14 @@
-"""Service wrapper."""
+"""The async client."""
 
 from typing import Final, Self
 
 import xmltodict
-from aiohttp import ClientSession
+
+try:
+    from aiohttp import ClientSession
+except ImportError as error:
+    msg = "Please install letsbuilda[async] for async support!"
+    raise ImportError(msg) from error
 
 from .models import JSONPackageMetadata, RSSPackageMetadata
 

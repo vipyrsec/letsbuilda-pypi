@@ -9,7 +9,7 @@ license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.11.4"
 dependencies = [
-    "aiohttp",
+    "requests",
     "xmltodict",
     "pendulum",
 ]
@@ -19,6 +19,9 @@ repository = "https://github.com/letsbuilda/letsbuilda-pypi/"
 documentation = "https://docs.letsbuilda.dev/letsbuilda-pypi/"
 
 [project.optional-dependencies]
+async = [
+    "aiohttp",
+]
 dev = [
     "pre-commit",
     "black",
