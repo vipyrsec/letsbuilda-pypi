@@ -1,10 +1,8 @@
 """Models for JSON responses."""
 
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Self
-
-import pendulum
-from pendulum import DateTime
 
 
 @dataclass(frozen=True, slots=True)
@@ -15,7 +13,7 @@ class Vulnerability:
     aliases: list[str]
     link: str
     source: str
-    withdrawn: DateTime | None
+    withdrawn: datetime | None
     summary: str
     details: str
     fixed_in: list[str]
@@ -24,7 +22,7 @@ class Vulnerability:
     def from_dict(cls: type[Self], data: dict) -> Self:
         """Build an instance from a dictionary."""
         if data["withdrawn"] is not None:
-            data["withdrawn"]: DateTime = pendulum.parse(data["withdrawn"])
+            data["withdrawn"]: datetime = datetime.fromisoformat(data["withdrawn"])
 
         return cls(**data)
 
@@ -71,8 +69,8 @@ class URL:
     python_version: str
     requires_python: str | None
     size: int
-    upload_time: DateTime
-    upload_time_iso_8601: DateTime
+    upload_time: datetime
+    upload_time_iso_8601: datetime
     url: str
     yanked: bool
     yanked_reason: None
@@ -80,8 +78,8 @@ class URL:
     @classmethod
     def from_dict(cls: type[Self], data: dict) -> Self:
         """Build an instance from a dictionary."""
-        data["upload_time"]: DateTime = pendulum.parse(data["upload_time"])
-        data["upload_time_iso_8601"]: DateTime = pendulum.parse(data["upload_time_iso_8601"])
+        data["upload_time"]: datetime = datetime.fromisoformat(data["upload_time"])
+        data["upload_time_iso_8601"]: datetime = datetime.fromisoformat(data["upload_time_iso_8601"])
 
         return cls(**data)
 

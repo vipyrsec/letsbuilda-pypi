@@ -19,7 +19,7 @@ class PyPIServices:
 
     def get_rss_feed(self: Self, feed_url: str) -> list[RSSPackageMetadata]:
         """Get the new packages RSS feed."""
-        response_text = self.http_session.get(feed_url).text()
+        response_text = self.http_session.get(feed_url).text
         rss_data = xmltodict.parse(response_text)["rss"]["channel"]["item"]
         return [RSSPackageMetadata.build_from(package_data) for package_data in rss_data]
 

@@ -2,11 +2,8 @@
 
 from dataclasses import dataclass
 from datetime import datetime
+from email.utils import parsedate_to_datetime
 from typing import Self
-
-
-def _parse_publication_date(publication_date: str) -> datetime:
-    return datetime.strptime(publication_date, "%a, %d %b %Y %H:%M:%S %Z")  # noqa: DTZ007 - uses `Z` instead of `z`
 
 
 @dataclass(frozen=True, slots=True)
@@ -28,6 +25,8 @@ class RSSPackageMetadata:
         title = split_title[0]
         version = split_title[1] if len(split_title) == 2 else None  # noqa: PLR2004 - is not magic
 
+        publication_date = parsedate_to_datetime(data.get("pubDate")) if data.get("pubDate") is not None else None
+
         return cls(
             title=title,
             version=version,
@@ -35,5 +34,5 @@ class RSSPackageMetadata:
             guid=data.get("guid"),
             description=data.get("description"),
             author=data.get("author"),
-            publication_date=_parse_publication_date(data.get("pubDate")),
+            publication_date=publication_date,
         )
