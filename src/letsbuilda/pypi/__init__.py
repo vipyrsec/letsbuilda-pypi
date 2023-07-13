@@ -3,7 +3,7 @@
 from .models import JSONPackageMetadata, RSSPackageMetadata
 from .sync_client import PyPIServices
 
-__all__: list[str] = [
+__all__ = [
     "PyPIServices",
     "JSONPackageMetadata",
     "RSSPackageMetadata",
