@@ -38,6 +38,9 @@ docs = [
     "sphinx-autoapi",
     "releases",
     "toml",
+
+    # from async extra
+    "aiohttp",
 ]
 
 [build-system]
