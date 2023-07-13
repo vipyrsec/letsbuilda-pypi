@@ -29,6 +29,9 @@ dev = [
 ]
 tests = [
     "pytest",
+
+    # from async extra
+    "aiohttp",
 ]
 docs = [
     "sphinx",
