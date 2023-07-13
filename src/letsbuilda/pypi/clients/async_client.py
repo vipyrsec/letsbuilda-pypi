@@ -1,5 +1,6 @@
 """The async client."""
 
+from io import BytesIO
 from typing import Final, Self
 
 import xmltodict
@@ -41,3 +42,14 @@ class PyPIServices:
             url = f"https://pypi.org/pypi/{package_name}/json"
         async with self.http_session.get(url) as response:
             return JSONPackageMetadata.from_dict(await response.json())
+
+    async def fetch_bytes(
+        self: Self,
+        url: str,
+    ) -> BytesIO:
+        """Fetch bytes from a URL."""
+        buffer = BytesIO()
+        async with self.http_session.get(url) as response:
+            buffer.write(await response.content.read())
+        buffer.seek(0)
+        return buffer

@@ -1,5 +1,6 @@
 """The sync client."""
 
+from io import BytesIO
 from typing import Final, Self
 
 import xmltodict
@@ -35,3 +36,13 @@ class PyPIServices:
             url = f"https://pypi.org/pypi/{package_name}/json"
         response_dict = self.http_session.get(url).json()
         return JSONPackageMetadata.from_dict(response_dict)
+
+    def fetch_bytes(
+        self: Self,
+        url: str,
+    ) -> BytesIO:
+        """Fetch bytes from a URL."""
+        response = self.http_session.get(url)
+        buffer = BytesIO(response.content)
+        buffer.seek(0)
+        return buffer
