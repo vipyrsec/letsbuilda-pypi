@@ -1,5 +1,6 @@
 """The async client."""
 
+from http import HTTPStatus
 from io import BytesIO
 from typing import Final, Self
 
@@ -11,7 +12,8 @@ except ImportError as error:
     msg = "Please install letsbuilda[async] for async support!"
     raise ImportError(msg) from error
 
-from .models import JSONPackageMetadata, RSSPackageMetadata
+from .exceptions import PackageNotFoundError
+from .models import JSONPackageMetadata, Package, RSSPackageMetadata
 
 
 class PyPIServices:
@@ -30,18 +32,28 @@ class PyPIServices:
             rss_data = xmltodict.parse(response_text)["rss"]["channel"]["item"]
             return [RSSPackageMetadata.build_from(package_data) for package_data in rss_data]
 
-    async def get_package_metadata(
+    async def get_package_json_metadata(
         self: Self,
-        package_name: str,
+        package_title: str,
         package_version: str | None = None,
     ) -> JSONPackageMetadata:
         """Get metadata for a package."""
         if package_version is not None:
-            url = f"https://pypi.org/pypi/{package_name}/{package_version}/json"
+            url = f"https://pypi.org/pypi/{package_title}/{package_version}/json"
         else:
-            url = f"https://pypi.org/pypi/{package_name}/json"
+            url = f"https://pypi.org/pypi/{package_title}/json"
         async with self.http_session.get(url) as response:
+            if response.status == HTTPStatus.NOT_FOUND:
+                raise PackageNotFoundError(package_title, package_version)
             return JSONPackageMetadata.from_dict(await response.json())
+
+    async def get_package_metadata(
+        self: Self,
+        package_title: str,
+        package_version: str | None = None,
+    ) -> Package:
+        """Get metadata for a package."""
+        return Package.from_dict(await self.get_package_json_metadata(package_title, package_version))
 
     async def fetch_bytes(
         self: Self,
