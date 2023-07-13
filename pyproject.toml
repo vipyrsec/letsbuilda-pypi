@@ -56,6 +56,9 @@ ignore = [
 target-version = "py311"
 line-length = 120
 
+[tool.ruff.isort]
+known-first-party = ["letsbuilda.pypi"]
+
 [tool.ruff.pydocstyle]
 convention = "numpy"
 

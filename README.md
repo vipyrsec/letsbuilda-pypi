@@ -20,7 +20,7 @@ package_metadata = pypi_client.get_package_metadata("letsbuilda-pypi")
 
 ```py
 from aiohttp import ClientSession
-from letsbuilda.pypi.async_client import PyPIServices
+from letsbuilda.pypi.clients.async_client import PyPIServices
 
 http_session = aiohttp.ClientSession()
 pypi_client = PyPIServices(http_session)
