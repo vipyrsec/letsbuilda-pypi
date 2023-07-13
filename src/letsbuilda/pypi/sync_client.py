@@ -6,7 +6,7 @@ from typing import Final, Self
 import xmltodict
 from requests import Session
 
-from letsbuilda.pypi.models import JSONPackageMetadata, RSSPackageMetadata
+from .models import JSONPackageMetadata, RSSPackageMetadata
 
 
 class PyPIServices:
