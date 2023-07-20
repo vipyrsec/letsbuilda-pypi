@@ -53,7 +53,7 @@ class PyPIServices:
         package_version: str | None = None,
     ) -> Package:
         """Get metadata for a package."""
-        return Package.from_dict(await self.get_package_json_metadata(package_title, package_version))
+        return Package.from_json_api_data(await self.get_package_json_metadata(package_title, package_version))
 
     async def fetch_bytes(
         self: Self,
