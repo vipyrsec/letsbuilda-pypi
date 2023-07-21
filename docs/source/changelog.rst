@@ -4,6 +4,9 @@
 Changelog
 =========
 
+- :release:`5.0.0 <21st July 2023>`
+- :feature:`39` Remove file handling
+
 - :release:`4.0.0 <25th April 2023>`
 - :feature:`18` Use a single function to get versioned package metadata
 
