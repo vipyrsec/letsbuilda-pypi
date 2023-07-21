@@ -1,13 +1,13 @@
 [project]
 name = "letsbuilda-pypi"
-version = "5.0.0b2"
+version = "5.0.0b3"
 description = "A wrapper for PyPI's API and RSS feed"
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
 ]
 license = { text = "MIT" }
 readme = "README.md"
-requires-python = ">=3.11.4"
+requires-python = ">=3.11"
 dependencies = [
     "requests",
     "xmltodict",

@@ -1,7 +1,6 @@
 """The sync client."""
 
 from http import HTTPStatus
-from io import BytesIO
 from typing import Final, Self
 
 import xmltodict
@@ -48,13 +47,3 @@ class PyPIServices:
     ) -> Package:
         """Get metadata for a package."""
         return Package.from_json_api_data(self.get_package_json_metadata(package_title, package_version))
-
-    def fetch_bytes(
-        self: Self,
-        url: str,
-    ) -> BytesIO:
-        """Fetch bytes from a URL."""
-        response = self.http_session.get(url)
-        buffer = BytesIO(response.content)
-        buffer.seek(0)
-        return buffer
