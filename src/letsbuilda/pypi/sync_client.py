@@ -11,14 +11,9 @@ from .exceptions import PackageNotFoundError
 from .models import JSONPackageMetadata, Package, RSSPackageMetadata
 
 if TYPE_CHECKING:
-    import sys
+    from typing import Self
 
     from requests import Session
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
 
 
 class PyPIServices:

@@ -2,15 +2,8 @@
 
 from __future__ import annotations
 
-import sys
+from datetime import UTC, datetime
 from typing import Final
-
-if sys.version_info >= (3, 11):
-    from datetime import UTC, datetime
-else:
-    from datetime import datetime, timezone
-
-    UTC = timezone.utc
 
 from letsbuilda.pypi import RSSPackageMetadata
 

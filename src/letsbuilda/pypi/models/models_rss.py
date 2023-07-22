@@ -7,13 +7,8 @@ from email.utils import parsedate_to_datetime
 from typing import TYPE_CHECKING
 
 if TYPE_CHECKING:
-    import sys
     from datetime import datetime
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
+    from typing import Self
 
 
 @dataclass(frozen=True)
