@@ -57,7 +57,7 @@ target-version = "py38"
 line-length = 120
 select = ["ALL"]
 ignore = [
-    "S311", # (Standard pseudo-random generators are not suitable for cryptographic purposes) - Really?
+    "PLC0414", # (Import alias does not rename original package) - Re-exporting
 ]
 
 [tool.ruff.extend-per-file-ignores]
