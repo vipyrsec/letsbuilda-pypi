@@ -16,7 +16,7 @@ if TYPE_CHECKING:
         pass
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Distribution:
     """Metadata for a distribution."""
 
@@ -32,7 +32,7 @@ class Distribution:
         )
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Release:
     """Metadata for a release."""
 
@@ -48,7 +48,7 @@ class Release:
         )
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Package:
     """Metadata for a package."""
 

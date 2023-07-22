@@ -15,7 +15,7 @@ if TYPE_CHECKING:
         from typing_extensions import Self
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Vulnerability:
     """Security vulnerability."""
 
@@ -37,7 +37,7 @@ class Vulnerability:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Downloads:
     """Release download counts."""
 
@@ -51,7 +51,7 @@ class Downloads:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Digests:
     """URL file digests."""
 
@@ -65,7 +65,7 @@ class Digests:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class URL:
     """Package release URL."""
 
@@ -94,7 +94,7 @@ class URL:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Info:
     """Package metadata internal info block."""
 
@@ -131,7 +131,7 @@ class Info:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class JSONPackageMetadata:
     """Package metadata."""
 

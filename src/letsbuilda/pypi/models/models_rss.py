@@ -16,7 +16,7 @@ if TYPE_CHECKING:
         from typing_extensions import Self
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class RSSPackageMetadata:
     """RSS Package metadata."""
 
