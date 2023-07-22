@@ -1,8 +1,18 @@
 """Models for JSON responses."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Self
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import sys
+
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
+        from typing_extensions import Self
 
 
 @dataclass(frozen=True, slots=True)
@@ -128,7 +138,7 @@ class JSONPackageMetadata:
     info: Info
     last_serial: int
     urls: list[URL]
-    vulnerabilities: list["Vulnerability"]
+    vulnerabilities: list[Vulnerability]
 
     @classmethod
     def from_dict(cls: type[Self], data: dict) -> Self:
