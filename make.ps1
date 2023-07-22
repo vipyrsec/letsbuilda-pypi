@@ -1,6 +1,6 @@
 <#
 .SYNOPSIS
-Testing using PowerShell to replace my Makefile
+Makefile
 
 .DESCRIPTION
 USAGE
@@ -52,8 +52,8 @@ function Invoke-Upgrade-Deps
 function Invoke-Lint
 {
     pre-commit run --all-files
-    python -m black src/
-    python -m ruff --fix src/
+    python -m black .
+    python -m ruff --fix .
 }
 
 function Invoke-Test

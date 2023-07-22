@@ -1,12 +1,22 @@
 """Models for package metadata."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
-from typing import Self
+from typing import TYPE_CHECKING
 
-from .models_json import URL, JSONPackageMetadata
+if TYPE_CHECKING:
+    import sys
+
+    from .models_json import URL, JSONPackageMetadata
+
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
+        pass
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Distribution:
     """Metadata for a distribution."""
 
@@ -22,7 +32,7 @@ class Distribution:
         )
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Release:
     """Metadata for a release."""
 
@@ -38,7 +48,7 @@ class Release:
         )
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Package:
     """Metadata for a package."""
 

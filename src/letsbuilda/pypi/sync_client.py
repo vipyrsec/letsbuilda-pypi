@@ -1,13 +1,24 @@
 """The sync client."""
 
+from __future__ import annotations
+
 from http import HTTPStatus
-from typing import Final, Self
+from typing import TYPE_CHECKING, Final
 
 import xmltodict
-from requests import Session
 
 from .exceptions import PackageNotFoundError
 from .models import JSONPackageMetadata, Package, RSSPackageMetadata
+
+if TYPE_CHECKING:
+    import sys
+
+    from requests import Session
+
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
+        from typing_extensions import Self
 
 
 class PyPIServices:

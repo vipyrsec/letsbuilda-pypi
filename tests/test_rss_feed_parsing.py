@@ -1,7 +1,16 @@
-"""Test parsing metadata from the RSS feeds"""
+"""Test parsing metadata from the RSS feeds."""
 
-from datetime import datetime, UTC
+from __future__ import annotations
+
+import sys
 from typing import Final
+
+if sys.version_info >= (3, 11):
+    from datetime import UTC, datetime
+else:
+    from datetime import datetime, timezone
+
+    UTC = timezone.utc
 
 from letsbuilda.pypi import RSSPackageMetadata
 
@@ -21,7 +30,7 @@ UPDATED_PACKAGE_DATA: Final[dict[str, str]] = {
 
 
 def test_parsing_new_package_data() -> None:
-    """Confirm sample new package data gets parsed correctly"""
+    """Confirm sample new package data gets parsed correctly."""
     parsed_data = RSSPackageMetadata.build_from(NEW_PACKAGE_DATA)
     assert parsed_data.publication_date == datetime(2023, 3, 29, 21, 30, 5, tzinfo=UTC)
     assert parsed_data.author is None
@@ -30,6 +39,6 @@ def test_parsing_new_package_data() -> None:
 
 
 def test_parsing_updated_package_data() -> None:
-    """Confirm sample updated package data gets parsed correctly"""
+    """Confirm sample updated package data gets parsed correctly."""
     parsed_data = RSSPackageMetadata.build_from(UPDATED_PACKAGE_DATA)
     assert parsed_data.version == "1.0.0"

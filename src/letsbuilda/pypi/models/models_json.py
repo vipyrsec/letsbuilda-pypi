@@ -1,11 +1,21 @@
 """Models for JSON responses."""
 
+from __future__ import annotations
+
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Self
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    import sys
+
+    if sys.version_info >= (3, 11):
+        from typing import Self
+    else:
+        from typing_extensions import Self
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Vulnerability:
     """Security vulnerability."""
 
@@ -27,7 +37,7 @@ class Vulnerability:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Downloads:
     """Release download counts."""
 
@@ -41,7 +51,7 @@ class Downloads:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Digests:
     """URL file digests."""
 
@@ -55,7 +65,7 @@ class Digests:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class URL:
     """Package release URL."""
 
@@ -84,7 +94,7 @@ class URL:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class Info:
     """Package metadata internal info block."""
 
@@ -121,14 +131,14 @@ class Info:
         return cls(**data)
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True)
 class JSONPackageMetadata:
     """Package metadata."""
 
     info: Info
     last_serial: int
     urls: list[URL]
-    vulnerabilities: list["Vulnerability"]
+    vulnerabilities: list[Vulnerability]
 
     @classmethod
     def from_dict(cls: type[Self], data: dict) -> Self:
