@@ -8,6 +8,7 @@ Changelog
 - :feature:`35` Add sync client
 - :feature:`25` Exception type for invalid packages
 - :feature:`16` Create basic model containing the most common attributes
+- :feature:`44` Re-export all items in top level
 - :support:`41` Update CI
 
 - :release:`4.0.0 <25th April 2023>`
