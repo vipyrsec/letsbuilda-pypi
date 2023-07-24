@@ -1,7 +1,5 @@
 """Test parsing metadata from the RSS feeds."""
 
-from __future__ import annotations
-
 from datetime import UTC, datetime
 from typing import Final
 

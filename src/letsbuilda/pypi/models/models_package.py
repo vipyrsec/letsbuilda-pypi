@@ -1,14 +1,9 @@
 """Models for package metadata."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import Self
 
-if TYPE_CHECKING:
-    from typing import Self
-
-    from .models_json import URL, JSONPackageMetadata
+from .models_json import URL, JSONPackageMetadata
 
 
 @dataclass(frozen=True)

@@ -1,7 +1,5 @@
 """Test parsing metadata from the JSON API."""
 
-from __future__ import annotations
-
 import json
 from pathlib import Path
 

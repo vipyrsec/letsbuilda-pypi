@@ -1,9 +1,7 @@
 """The async client."""
 
-from __future__ import annotations
-
 from http import HTTPStatus
-from typing import TYPE_CHECKING, Final
+from typing import Final
 
 import xmltodict
 
@@ -13,13 +11,12 @@ except ImportError as error:
     msg = "Please install letsbuilda[async] for async support!"
     raise ImportError(msg) from error
 
+from typing import Self
+
+from aiohttp import ClientSession
+
 from .exceptions import PackageNotFoundError
 from .models import JSONPackageMetadata, Package, RSSPackageMetadata
-
-if TYPE_CHECKING:
-    from typing import Self
-
-    from aiohttp import ClientSession
 
 
 class PyPIServices:
