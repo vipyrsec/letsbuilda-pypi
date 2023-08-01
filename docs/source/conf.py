@@ -10,8 +10,8 @@ project_metadata = metadata("letsbuilda-pypi")
 project: str = project_metadata["Name"]
 release: str = project_metadata["Version"]
 REPO_LINK: str = project_metadata["Project-URL"].replace("repository, ", "")
-copyright: str = "Let's build a ... SOC"  # noqa: A001
-author: str = "Let's build a ... SOC Team"
+copyright: str = "Let's build a ..."  # noqa: A001
+author: str = "Let's build a ... Community"
 
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named "sphinx.ext.*") or your custom
