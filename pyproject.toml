@@ -1,6 +1,6 @@
 [project]
 name = "letsbuilda-pypi"
-version = "5.0.0b3"
+version = "5.0.0"
 description = "A wrapper for PyPI's API and RSS feed"
 authors = [
     { name = "Bradley Reynolds", email = "bradley.reynolds@darbia.dev" },
@@ -9,7 +9,7 @@ license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "requests",
+    "httpx",
     "xmltodict",
 ]
 
@@ -18,9 +18,6 @@ repository = "https://github.com/letsbuilda/letsbuilda-pypi/"
 documentation = "https://docs.letsbuilda.dev/letsbuilda-pypi/"
 
 [project.optional-dependencies]
-async = [
-    "aiohttp",
-]
 dev = [
     "pre-commit",
     "black",
@@ -28,19 +25,12 @@ dev = [
 ]
 tests = [
     "pytest",
-
-    # from async extra
-    "aiohttp",
 ]
 docs = [
     "sphinx",
     "furo",
     "sphinx-autoapi",
     "releases",
-    "toml",
-
-    # from async extra
-    "aiohttp",
 ]
 
 [build-system]

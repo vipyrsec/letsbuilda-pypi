@@ -5,6 +5,7 @@ Changelog
 =========
 
 - :release:`5.0.0 <21st July 2023>`
+- :feature:`48` Replace requests and aiohttp with HTTPX
 - :feature:`35` Add sync client
 - :feature:`25` Exception type for invalid packages
 - :feature:`16` Create basic model containing the most common attributes
