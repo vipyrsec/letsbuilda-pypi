@@ -7,23 +7,25 @@ A wrapper for [PyPI's API and RSS feeds](https://warehouse.pypa.io/api-reference
 ### Sync client
 
 ```py
-from requests import Session
+from httpx import Client
 from letsbuilda.pypi import PyPIServices
 
-http_session = Session()
-pypi_client = PyPIServices(http_session)
+http_client = Client()
+pypi_client = PyPIServices(http_client)
 
-package_metadata = pypi_client.get_package_metadata("letsbuilda-pypi")
+print(pypi_client.get_rss_feed(pypi_client.NEWEST_PACKAGES_FEED_URL))
+print(pypi_client.get_package_metadata("letsbuilda-pypi"))
 ```
 
 ### Async client
 
 ```py
-from aiohttp import ClientSession
-from letsbuilda.pypi.clients.async_client import PyPIServices
+from httpx import AsyncClient
+from letsbuilda.pypi.async_client import PyPIServices
 
-http_session = aiohttp.ClientSession()
+http_client = AsyncClient()
 pypi_client = PyPIServices(http_session)
 
-package_metadata = await pypi_client.get_package_metadata("letsbuilda-pypi")
+print(await pypi_client.get_rss_feed(pypi_client.NEWEST_PACKAGES_FEED_URL))
+print(await pypi_client.get_package_metadata("letsbuilda-pypi"))
 ```

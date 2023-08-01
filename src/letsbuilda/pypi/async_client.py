@@ -1,19 +1,10 @@
 """The async client."""
 
 from http import HTTPStatus
-from typing import Final
+from typing import Final, Self
 
 import xmltodict
-
-try:
-    pass
-except ImportError as error:
-    msg = "Please install letsbuilda[async] for async support!"
-    raise ImportError(msg) from error
-
-from typing import Self
-
-from aiohttp import ClientSession
+from httpx import AsyncClient
 
 from .exceptions import PackageNotFoundError
 from .models import JSONPackageMetadata, Package, RSSPackageMetadata
@@ -25,15 +16,14 @@ class PyPIServices:
     NEWEST_PACKAGES_FEED_URL: Final[str] = "https://pypi.org/rss/packages.xml"
     PACKAGE_UPDATES_FEED_URL: Final[str] = "https://pypi.org/rss/updates.xml"
 
-    def __init__(self: Self, http_session: ClientSession) -> None:
-        self.http_session = http_session
+    def __init__(self: Self, http_client: AsyncClient) -> None:
+        self.http_client = http_client
 
     async def get_rss_feed(self: Self, feed_url: str) -> list[RSSPackageMetadata]:
         """Get the new packages RSS feed."""
-        async with self.http_session.get(feed_url) as response:
-            response_text = await response.text()
-            rss_data = xmltodict.parse(response_text)["rss"]["channel"]["item"]
-            return [RSSPackageMetadata.build_from(package_data) for package_data in rss_data]
+        response = await self.http_client.get(feed_url)
+        rss_data = xmltodict.parse(response.text)["rss"]["channel"]["item"]
+        return [RSSPackageMetadata.build_from(package_data) for package_data in rss_data]
 
     async def get_package_json_metadata(
         self: Self,
@@ -45,10 +35,10 @@ class PyPIServices:
             url = f"https://pypi.org/pypi/{package_title}/{package_version}/json"
         else:
             url = f"https://pypi.org/pypi/{package_title}/json"
-        async with self.http_session.get(url) as response:
-            if response.status == HTTPStatus.NOT_FOUND:
-                raise PackageNotFoundError(package_title, package_version)
-            return JSONPackageMetadata.from_dict(await response.json())
+        response = await self.http_client.get(url)
+        if response.status_code == HTTPStatus.NOT_FOUND:
+            raise PackageNotFoundError(package_title, package_version)
+        return JSONPackageMetadata.from_dict(response.json())
 
     async def get_package_metadata(
         self: Self,

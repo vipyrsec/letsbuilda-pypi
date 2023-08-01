@@ -11,7 +11,7 @@ COMMANDS
     install-dev       install local package in editable mode
     update-deps       update the dependencies
     upgrade-deps      upgrade the dependencies
-    lint              run `isort` and `black`
+    lint              run `pre-commit`, `black`, and `ruff`
     test              run `pytest`
     build-dist        run `python -m build`
     clean             delete generated content
