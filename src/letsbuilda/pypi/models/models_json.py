@@ -1,18 +1,8 @@
 """Models for JSON responses."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
 from datetime import datetime
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import sys
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
+from typing import Self
 
 
 @dataclass(frozen=True)

@@ -1,19 +1,9 @@
 """Models for RSS responses."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
+from datetime import datetime
 from email.utils import parsedate_to_datetime
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    import sys
-    from datetime import datetime
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        from typing_extensions import Self
+from typing import Self
 
 
 @dataclass(frozen=True)
@@ -29,7 +19,7 @@ class RSSPackageMetadata:
     publication_date: datetime
 
     @classmethod
-    def build_from(cls: type[Self], data: dict[str, str]) -> RSSPackageMetadata:
+    def build_from(cls: type[Self], data: dict[str, str]) -> Self:
         """Build an instance from raw data."""
         split_title = data.get("title").removesuffix(" added to PyPI").split()
         title = split_title[0]

@@ -1,19 +1,9 @@
 """Models for package metadata."""
 
-from __future__ import annotations
-
 from dataclasses import dataclass
-from typing import TYPE_CHECKING
+from typing import Self
 
-if TYPE_CHECKING:
-    import sys
-
-    from .models_json import URL, JSONPackageMetadata
-
-    if sys.version_info >= (3, 11):
-        from typing import Self
-    else:
-        pass
+from .models_json import URL, JSONPackageMetadata
 
 
 @dataclass(frozen=True)
