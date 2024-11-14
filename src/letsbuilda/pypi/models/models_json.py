@@ -140,6 +140,8 @@ class Info:
                 "Provides-Extra",
                 "Provides-Dist",
                 "Obsoletes-Dist",
+                "License-Expression",
+                "License-File",
             ]
         ]
         | None
