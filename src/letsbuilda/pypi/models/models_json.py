@@ -114,6 +114,8 @@ class Info:
     version: str
     yanked: bool
     yanked_reason: str | None
+    license_expression: str | None
+    license_files: str | None
     dynamic: (
         list[
             Literal[
