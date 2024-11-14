@@ -132,6 +132,8 @@ class Info:
                 "Maintainer",
                 "Maintainer-email",
                 "License",
+                "License-Expression",
+                "License-File",
                 "Classifier",
                 "Requires-Dist",
                 "Requires-Python",
