@@ -100,6 +100,8 @@ class Info:
     home_page: str
     keywords: str
     license: str
+    license_expression: str | None
+    license_files: list[str] | None
     maintainer: str
     maintainer_email: str
     name: str
@@ -130,6 +132,8 @@ class Info:
                 "Maintainer",
                 "Maintainer-email",
                 "License",
+                "License-Expression",
+                "License-File",
                 "Classifier",
                 "Requires-Dist",
                 "Requires-Python",
