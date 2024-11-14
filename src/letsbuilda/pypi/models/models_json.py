@@ -115,7 +115,7 @@ class Info:
     yanked: bool
     yanked_reason: str | None
     license_expression: str | None
-    license_files: str | None
+    license_files: list[str] | None
     dynamic: (
         list[
             Literal[
